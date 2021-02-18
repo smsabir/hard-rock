@@ -11,7 +11,7 @@ const displaySongs = songs =>{
     const songContainer = document.getElementById("song-container");
     songContainer.innerHTML = '';
     songs.forEach(song => {
-        console.log(song);
+        //console.log(song);
         const songDiv = document.createElement('div');
         songDiv.className = 'single-result row align-items-center my-3 p-3';
         songDiv.innerHTML = ` 
@@ -44,12 +44,14 @@ const getLyric = async (artist, title) => {
 }
 
 const displayLyrics = lyrics =>{
+    document.getElementById("error-message").innerText = "";
     const lyricsDiv = document.getElementById("song-lyrics");
     lyricsDiv.innerText = lyrics;
 
 }
 
 const displayError = (error) =>{
+    document.getElementById("song-lyrics").innerText ='';
     const errorMsg = document.getElementById("error-message");
     errorMsg.innerText = error;
 }
