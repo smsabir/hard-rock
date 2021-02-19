@@ -50,6 +50,13 @@
                     <button id="searchBtn" onclick="searchSongs()" class="btn btn-success search-btn">Search</button>
                 </div>
             </div>
+            <!-- spinner -->
+            <div  class="d-flex justify-content-center"> <!-- Why d-none not working here -->
+                <div id="loading-spinner" class="spinner-border text-warning d-none" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </div>
+            
             <!-- Single Lyrics -->
             <p id="error-message"></p>
             <div id="song-lyrics" class="single-lyrics text-center">

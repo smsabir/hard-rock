@@ -1,11 +1,12 @@
 const searchSongs = async () =>{
     const searchText = document.getElementById("search-query").value;
     const url = `https://api.lyrics.ovh/suggest/:${searchText}`
-
+    toggleSpinner();
     //load data
     const res = await fetch(url);
     const data = await res.json();
     displaySongs(data.data);
+    
 }
 const displaySongs = songs =>{
     const songContainer = document.getElementById("song-container");
@@ -27,11 +28,13 @@ const displaySongs = songs =>{
             </div>
         `;
         songContainer.appendChild(songDiv);
+        toggleSpinner(false);
     });
 }
 
 const getLyric = async (artist, title) => {
     const url = `https://api.lyrics.ovh/v1/${artist}/${title}`;
+    toggleSpinner();
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -47,6 +50,7 @@ const displayLyrics = lyrics =>{
     document.getElementById("error-message").innerText = "";
     const lyricsDiv = document.getElementById("song-lyrics");
     lyricsDiv.innerText = lyrics;
+    toggleSpinner();
 
 }
 
@@ -54,4 +58,29 @@ const displayError = (error) =>{
     document.getElementById("song-lyrics").innerText ='';
     const errorMsg = document.getElementById("error-message");
     errorMsg.innerText = error;
+    toggleSpinner();
 }
+
+const toggleSpinner = () =>{
+    const spinner = document.getElementById("loading-spinner");
+    const songs = document.getElementById("song-container");
+    
+    spinner.classList.toggle('d-none');
+    songs.classList.toggle('d-none');
+    // if(show){
+    //     spinner.classList.remove('d-none');
+    // }
+    // else{
+    //     spinner.classList.add('d-none');
+    // }
+    
+}
+
+const searchField = document.getElementById("search-query");
+searchField.addEventListener("keypress", function(event){
+    
+    if(event.key === 'Enter'){
+        event.preventDefault();
+        document.getElementById("searchBtn").click();
+    }
+})
